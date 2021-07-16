@@ -6,6 +6,7 @@ tar_option_set(packages = c("tidyverse", "dataRetrieval", "urbnmapr", "rnaturale
 
 # Load functions needed by targets below
 source("1_fetch/src/find_oldest_sites.R")
+source("1_fetch/src/get_site_data.R")
 source("3_visualize/src/map_sites.R")
 
 # Configuration
@@ -15,9 +16,33 @@ parameter <- c('00060')
 # Targets
 list(
   # Identify oldest sites
-  tar_target(oldest_active_sites, find_oldest_sites(states, parameter)),
+  tar_target(
+    oldest_active_sites,
+    find_oldest_sites(states, parameter)
+  ),
 
-  # TODO: PULL SITE DATA HERE
+  # PULL SITE DATA
+  tar_target(
+    wi_data,
+    get_site_data(
+      sites_info = oldest_active_sites,
+      state = 'WI',
+      parameter = parameter)
+  ),
+  tar_target(
+    mn_data,
+    get_site_data(
+      sites_info = oldest_active_sites,
+      state = 'MN',
+      parameter = parameter)
+  ),
+  tar_target(
+    mi_data,
+    get_site_data(
+      sites_info = oldest_active_sites,
+      state = 'MI',
+      parameter = parameter)
+  ),
 
   # Map oldest sites
   tar_target(
