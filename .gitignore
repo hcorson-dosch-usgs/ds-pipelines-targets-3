@@ -5,3 +5,6 @@
 
 # Specific files/dirs to ignore for this pipeline
 */tmp/*
+_targets/*
+3_visualize/out/*
+*.DS_Store
