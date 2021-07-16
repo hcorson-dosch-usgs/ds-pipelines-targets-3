@@ -7,7 +7,7 @@ plot_site_data <- function(out_file, site_data, parameter) {
     geom_line() +
     geom_point(data=filter(site_data, !(Quality %in% c('A','P'))), size=0.1) +
     ylab(dataRetrieval::parameterCdFile %>% filter(parameter_cd == parameter) %>% pull(parameter_nm)) +
-    ggtitle(site_data$Site[1])
+    ggtitle(sprintf('%s - site: %s', site_data$State[1], site_data$Site[1]))
   ggsave(out_file, plot=p, width=6, height=3)
   return(out_file)
 }
