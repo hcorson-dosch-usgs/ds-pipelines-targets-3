@@ -9,8 +9,3 @@ tally_site_obs <- function(site_data) {
     group_by(Site, State, Year) %>%
     summarize(NumObs = length(which(!is.na(Value))), .groups = "keep")
 }
-
-# function to combine all site tallies
-combine_obs_tallies <- function(...) {
-  bind_rows(...)
-}
